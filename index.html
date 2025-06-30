@@ -2,19 +2,33 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ظلان | السيرة الذاتية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@600&display=swap");
-
       /* أنيميشن توهج */
       @keyframes glow {
         0%,
         100% {
-          filter: drop-shadow(0 0 8px #00ffd5) drop-shadow(0 0 20px #00ffd5);
+          filter: drop-shadow(0 0 8px hsl(156, 90%, 27%))
+            drop-shadow(0 0 20px #0ab83b);
         }
         50% {
-          filter: drop-shadow(0 0 16px #00ffd5) drop-shadow(0 0 40px #00ffd5);
+          filter: drop-shadow(0 0 16px #ae0a9b) drop-shadow(0 0 40px #ff00b3);
+        }
+      }
+
+      /* أنيميشن زر العودة للأعلى */
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5;
+        }
+        50% {
+          box-shadow: 0 0 20px #00a9af, 0 0 40px #e00232d9;
         }
       }
 
@@ -27,8 +41,45 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        scroll-behavior: smooth;
       }
+
+      /* ثابت شريط التنقل */
+      nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        background: rgba(0, 77, 97, 0.9);
+        box-shadow: 0 0 15px #00ffd5cc;
+        z-index: 20;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        padding: 15px 10px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.1em;
+        font-size: 1.1em;
+      }
+      nav a {
+        color: #00ffd5;
+        text-decoration: none;
+        padding: 6px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0 0 10px #00ffd5aa;
+      }
+      nav a:hover,
+      nav a:focus {
+        background-color: #00ffd5;
+        color: #004d61;
+        box-shadow: 0 0 25px #00ffd5cc;
+        outline: none;
+      }
+
       header {
+        margin-top: 70px;
         background: linear-gradient(90deg, #002f3d, #004d61);
         padding: 60px 20px 80px;
         text-align: center;
@@ -36,9 +87,10 @@
         flex-direction: column;
         align-items: center;
         gap: 30px;
-        box-shadow: 0 0 25px #00ffd5aa;
+        box-shadow: 0 0 25px #ff009daa;
         position: relative;
         z-index: 10;
+        border-radius: 0 0 35px 35px;
       }
       header img.logo {
         width: 300px;
@@ -46,9 +98,11 @@
         height: auto;
         border-radius: 20px;
         animation: glow 3s ease-in-out infinite;
-        box-shadow: 0 0 15px #00ffd5, 0 0 30px #00ffd5, 0 0 60px #00ffd5,
-          0 0 90px #00ffd5;
+        box-shadow: 0 0 15px #ff00e1, 0 0 30px #ff00cc,
+          0 0 60px hsl(313, 100%, 50%), 0 0 90px #00ffd5;
         transition: transform 0.3s ease;
+        cursor: pointer;
+        user-select: none;
       }
       header img.logo:hover {
         transform: scale(1.05);
@@ -62,6 +116,7 @@
         color: #00ffd5;
         text-shadow: 0 0 8px #00ffd5, 0 0 20px #00ffd5, 0 0 30px #00ffd5;
         letter-spacing: 0.1em;
+        user-select: none;
       }
       header p {
         margin: 0;
@@ -69,15 +124,43 @@
         color: #a0e9e9cc;
         font-weight: 600;
         letter-spacing: 0.05em;
+        user-select: none;
       }
+      header .links {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      header .links a {
+        background: #00ffd5;
+        color: #004d61;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 12px 25px;
+        border-radius: 30px;
+        box-shadow: 0 0 20px #00ffd5aa;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        user-select: none;
+      }
+      header .links a:hover,
+      header .links a:focus {
+        background: #008a9d;
+        color: #d4f9fa;
+        box-shadow: 0 0 40px #00ffd5ee;
+        outline: none;
+      }
+
       section {
-        padding: 40px 20px;
+        padding: 40px 25px;
         max-width: 900px;
         margin: 40px auto;
         background: #0e1c27cc;
         border-radius: 15px;
         box-shadow: 0 0 25px #008a9d99;
         color: #d4f9fa;
+        line-height: 1.6;
+        font-size: 1.15em;
       }
       h2 {
         border-bottom: 3px solid #00ffd5;
@@ -88,6 +171,7 @@
         font-size: 2em;
         letter-spacing: 0.1em;
         color: #00ffd5;
+        user-select: none;
       }
       .grid {
         display: grid;
@@ -103,12 +187,28 @@
         font-size: 1.1em;
         transition: background 0.3s ease;
         cursor: default;
+        user-select: none;
       }
       .card:hover {
         background: #005a72;
         box-shadow: 0 0 20px #00ffd5cc, inset 0 0 10px #00ffd5ee;
         color: #e0ffff;
       }
+
+      /* روابط البريد والتواصل */
+      a.email-link,
+      a.tiktok-link {
+        color: #ff00f2;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.3s ease;
+      }
+      a.email-link:hover,
+      a.tiktok-link:hover {
+        text-decoration: underline;
+        color: #ff66f9;
+      }
+
       footer {
         text-align: center;
         padding: 25px 20px;
@@ -117,24 +217,38 @@
         font-weight: 600;
         font-size: 1em;
         letter-spacing: 0.05em;
-        box-shadow: inset 0 1px 5px #00ffd5aa;
+        box-shadow: inset 0 1px 5px #fb00ffaa;
+        user-select: none;
       }
-      a {
-        color: #00ffd5;
-        text-decoration: none;
-        font-weight: 700;
+
+      /* زر العودة للأعلى */
+      #backToTop {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        background: #00ffd5;
+        border-radius: 50%;
+        color: #004d61;
+        font-size: 28px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #00ffd5aa;
+        animation: pulse 2s infinite;
+        user-select: none;
+        display: none;
+        z-index: 1000;
+        transition: opacity 0.3s ease;
       }
-      a:hover {
-        text-decoration: underline;
+      #backToTop:hover {
+        background: #008a9d;
+        color: #d4f9fa;
+        box-shadow: 0 0 35px #00ffd5ee;
       }
-      .info-list p {
-        line-height: 2.2;
-        font-size: 1.15em;
-      }
-      ul {
-        font-size: 1.15em;
-        line-height: 2;
-      }
+
+      /* Responsive */
       @media (max-width: 600px) {
         header h1 {
           font-size: 2.5em;
@@ -156,40 +270,98 @@
         .card {
           font-size: 1em;
         }
+        nav {
+          font-size: 1em;
+          gap: 12px;
+          padding: 10px 5px;
+        }
+        nav a {
+          padding: 6px 10px;
+        }
+        header .links {
+          gap: 15px;
+        }
+        header .links a {
+          padding: 10px 20px;
+          font-size: 0.95em;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- شريط التنقل -->
+    <nav aria-label="القائمة الرئيسية">
+      <a href="#about" tabindex="1">المعلومات الشخصية</a>
+      <a href="#objective" tabindex="2">الهدف المهني</a>
+      <a href="#education" tabindex="3">المؤهل العلمي</a>
+      <a href="#skills" tabindex="4">المهارات</a>
+      <a href="#experience" tabindex="5">الخبرات العملية</a>
+      <a href="#languages" tabindex="6">اللغات</a>
+      <a href="#hobbies" tabindex="7">الهوايات والاهتمامات</a>
+    </nav>
+
+    <!-- رأس الصفحة -->
     <header>
       <img src="logo.png" alt="شعار ظلان" class="logo" />
       <h1>ظلان Zillan</h1>
       <p>طارق توفيق عبد الله الزوار | مصمم ومطور</p>
+      <div class="links" role="group" aria-label="روابط مهمة">
+        <a
+          href="https://ooodo.github.io/kamelo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          tabindex="9"
+          >الموقع الرسمي</a
+        >
+        <!-- WhatsApp Button -->
+        <a
+          class="whatsapp"
+          href="https://wa.me/967774722964"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="تواصل مع ظِلان عبر واتساب"
+        >
+          💬واتساب
+        </a>
+
+        <a
+          href="https://ooodo.github.io/G1/"
+          target="_blank"
+          rel="noopener noreferrer"
+          tabindex="10"
+          >أعمال الجرافيكس</a
+        >
+      </div>
     </header>
 
-    <section>
+    <!-- المعلومات الشخصية -->
+    <section id="about" tabindex="0" aria-label="المعلومات الشخصية">
       <h2>المعلومات الشخصية</h2>
-      <div class="info-list">
-        <p>الاسم: طارق توفيق عبد الله الزوار</p>
-        <p>تاريخ الميلاد: 21 يوليو 2007</p>
-        <p>الجنسية: يمني 🇾🇪</p>
-        <p>رقم الهاتف: +967 774722964</p>
-        <p>
-          البريد الإلكتروني:
-          <a href="mailto:tariq.zillan@gmail.com">tariq.zillan@gmail.com</a>
-        </p>
-        <p>
-          حساب TikTok:
-          <a
-            href="https://tiktok.com/@zillan_logos"
-            target="_blank"
-            rel="noopener"
-            >@zillan_logos</a
-          >
-        </p>
-      </div>
+      <p>الاسم: طارق توفيق عبد الله الزوار</p>
+      <p>تاريخ الميلاد: 21 يوليو 2007</p>
+      <p>الجنسية: يمني 🇾🇪</p>
+      <p>رقم الهاتف: +967 774722964</p>
+      <p>
+        البريد الإلكتروني:
+        <a href="mailto:tariq.zillan@gmail.com" class="email-link" tabindex="11"
+          >tariq.zillan@gmail.com</a
+        >
+      </p>
+      <p>
+        حساب TikTok:
+        <a
+          href="https://tiktok.com/@zillan_logos"
+          target="_blank"
+          rel="noopener"
+          class="tiktok-link"
+          tabindex="12"
+          >@zillan_logos</a
+        >
+      </p>
     </section>
 
-    <section>
+    <!-- الهدف المهني -->
+    <section id="objective" tabindex="0" aria-label="الهدف المهني">
       <h2>الهدف المهني</h2>
       <p>
         مصمم جرافيك ومطور مواقع شغوف بتقديم تصاميم احترافية وتجارب مستخدم سلسة.
@@ -198,7 +370,8 @@
       </p>
     </section>
 
-    <section>
+    <!-- المؤهل العلمي -->
+    <section id="education" tabindex="0" aria-label="المؤهل العلمي">
       <h2>المؤهل العلمي</h2>
       <p>خريج الثانوية العامة – 2025</p>
       <p>متعلم ذاتي في مجالات التصميم الجرافيكي وتطوير المواقع</p>
@@ -208,20 +381,21 @@
       </p>
     </section>
 
-    <section>
+    <!-- المهارات -->
+    <section id="skills" tabindex="0" aria-label="المهارات">
       <h2>المهارات</h2>
       <div class="grid">
         <div class="card">تصميم شعارات وواجهات احترافية</div>
         <div class="card">تصميم إعلانات سوشيال ميديا ومنشورات متجاوبة</div>
         <div class="card">تعديل وتحسين الصور</div>
         <div class="card">تطوير صفحات ويب بسيطة باستخدام HTML / CSS</div>
-        <div class="card">استخدام أدوات الذكاء الاصطناعي في التصميم</div>
         <div class="card">Adobe Photoshop / Illustrator / Figma / Canva</div>
         <div class="card">VS Code وبيئة التطوير</div>
       </div>
     </section>
 
-    <section>
+    <!-- الخبرات العملية -->
+    <section id="experience" tabindex="0" aria-label="الخبرات العملية">
       <h2>الخبرات العملية</h2>
       <div class="grid">
         <div class="card">
@@ -229,17 +403,18 @@
         </div>
         <div class="card">تطوير مواقع تعريفية بسيطة</div>
         <div class="card">إدارة محتوى بصري لحسابات TikTok وإنستغرام</div>
-        <div class="card">تصميمات باستخدام أدوات الذكاء الاصطناعي</div>
       </div>
     </section>
 
-    <section>
+    <!-- اللغات -->
+    <section id="languages" tabindex="0" aria-label="اللغات">
       <h2>اللغات</h2>
       <p>العربية: اللغة الأم</p>
       <p>الإنجليزية: جيد (قراءة وكتابة)</p>
     </section>
 
-    <section>
+    <!-- الهوايات والاهتمامات -->
+    <section id="hobbies" tabindex="0" aria-label="الهوايات والاهتمامات">
       <h2>الهوايات والاهتمامات</h2>
       <ul>
         <li>متابعة جديد التصميم والبرمجة</li>
@@ -249,5 +424,38 @@
     </section>
 
     <footer>&copy; 2025 - طارق الزوار (ظلان) | جميع الحقوق محفوظة</footer>
+
+    <!-- زر العودة للأعلى -->
+    <div
+      id="backToTop"
+      role="button"
+      aria-label="العودة إلى الأعلى"
+      tabindex="0"
+    >
+      ↑
+    </div>
+
+    <script>
+      // إظهار زر العودة للأعلى عند التمرير
+      const backToTop = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTop.style.display = "block";
+        } else {
+          backToTop.style.display = "none";
+        }
+      });
+
+      // عند الضغط على زر العودة للأعلى
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      backToTop.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    </script>
   </body>
 </html>
